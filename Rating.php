@@ -9,13 +9,13 @@ defined('is_running') or die('Not an entry point...');
 
 class Rating{
 	
-	function SectionTypes($section_types) {
+	static function SectionTypes($section_types) {
 		$section_types['Rating_section'] = array();
 		$section_types['Rating_section']['label'] = 'Rating';
 		return $section_types;
 	}	
 
-	function NewSections($links){
+	static function NewSections($links){
 		global $addonRelativeCode;
 		foreach ($links as $key => $link) {
 			$match = is_array($link[0]) ? implode('-',$link[0]) : $link[0] ;
@@ -33,7 +33,7 @@ class Rating{
 		return $scripts;
 	}
 	
-	function SaveSection($return,$section,$type) {
+	static function SaveSection($return,$section,$type) {
 		if( $type != 'Rating_section' ) {
 		  return $return;
 		}
@@ -44,7 +44,7 @@ class Rating{
 		return true;
 	}
 	
-	function DefaultContent($default_content,$type) {
+	static function DefaultContent($default_content,$type) {
 		if( $type != 'Rating_section' ) {
 		  return $default_content;
 		}
@@ -60,7 +60,7 @@ class Rating{
 		return $section;
 	}
 	
-	function SectionToContent($section_data) {
+	static function SectionToContent($section_data) {
 		if( $section_data['type'] != 'Rating_section' ) {
 		  return $section_data;
 		}
@@ -104,7 +104,7 @@ class Rating{
 		return $section_data;
 	}
 	
-	function HookHead(){
+	static function HookHead(){
 		global $page,$addonRelativeCode;
 		common::LoadComponents('fontawesome');
 		$page->head_js[] =  $addonRelativeCode . '/lib/jquery.rateit.min.js';
@@ -114,7 +114,7 @@ class Rating{
 		
 	}
 	
-	function PageRunScript($cmd) {
+	static function PageRunScript($cmd) {
 		global $page, $addonRelativeCode, $addonPathData; 
 	 
 		if ( $cmd == 'rating_section' ) {
@@ -183,7 +183,7 @@ class Rating{
 		return $cmd;
   }
 	
-	function GetIP(){
+	static function GetIP(){
 		if(isset($_SERVER['REMOTE_ADDR'])) {
 				return $_SERVER['REMOTE_ADDR'];
 		} else{ 
